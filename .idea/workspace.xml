@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="625d5a1a-0e7f-40a8-9701-d606f8fcc8f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/components/ServersSidebar.vue" afterDir="false" />
+    <list default="true" id="625d5a1a-0e7f-40a8-9701-d606f8fcc8f2" name="Changes" comment="bootstrap css/js 추가">
+      <change afterPath="$PROJECT_DIR$/front/public/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/components/DetailInfo.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/ServersSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/ServersSidebar.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,10 +21,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="97a46f59-0f80-4c1d-9e78-9e6a16797008" />
+        <option name="accountId" value="53466a3f-8c28-4aa5-bc5b-77d8a9cbc5ce" />
         <option name="url" value="https://github.com/cos850/Responseman.git" />
       </UrlAndAccount>
     </option>
@@ -42,20 +48,24 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/HR/projects/Responseman/front/src/components",
+    "last_opened_file_path": "C:/HR/projects/Responseman/front/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.editor",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\HR\projects\Responseman\front\public" />
       <recent name="C:\HR\projects\Responseman\front\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\HR\projects\Responseman\front\src\css" />
+      <recent name="C:\HR\projects\Responseman\front\src\js" />
       <recent name="D:\workspace\Responseman\front\src\assets" />
     </key>
   </component>
@@ -75,8 +85,23 @@
       <workItem from="1677654326668" duration="1745000" />
       <workItem from="1679101554899" duration="427000" />
       <workItem from="1682925001114" duration="487000" />
-      <workItem from="1682925621423" duration="12096000" />
+      <workItem from="1682925621423" duration="22738000" />
     </task>
+    <task id="LOCAL-00001" summary="sidebar 구조 변경">
+      <created>1682937880347</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682937880347</updated>
+    </task>
+    <task id="LOCAL-00002" summary="bootstrap css/js 추가">
+      <created>1683635898775</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683635898775</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -92,5 +117,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="sidebar 구조 변경" />
+    <MESSAGE value="bootstrap css/js 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="bootstrap css/js 추가" />
   </component>
 </project>
