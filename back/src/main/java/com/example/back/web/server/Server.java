@@ -1,4 +1,4 @@
-package com.example.back.management.server;
+package com.example.back.web.server;
 
 import com.example.back.base.HistEntity;
 import jakarta.persistence.*;
@@ -19,6 +19,8 @@ public class Server extends HistEntity {
 
     private String desc;
 
+    private String responseData;
+
     public void setPort(int port) {
         this.port = port;
     }
@@ -27,4 +29,7 @@ public class Server extends HistEntity {
         this.desc = desc;
     }
 
+    public void setResponseData(String responseData) {
+        this.responseData = responseData;
+    }
 }
