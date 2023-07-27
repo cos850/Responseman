@@ -1,4 +1,4 @@
-package com.example.back.management.server;
+package com.example.back.web.server;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +37,7 @@ public class ServerService {
         result.ifPresent(server->{
             server.setPort(dto.getPort());
             server.setDesc(dto.getDesc());
+            server.setResponseData(dto.getResponseData());
 
             repository.save(server);
         });
@@ -65,5 +66,25 @@ public class ServerService {
         String message = "필수 요소를 입력하지 않았습니다. 필수 요소[{0}]";
         Assert.notNull(server.getName(), MessageFormat.format(message, "name"));
         Assert.notNull(server.getPort(), MessageFormat.format(message, "port"));
+    }
+
+    public boolean control(String name, char type){
+        Assert.notNull(name, MessageFormat.format("필수 요소를 입력하지 않았습니다. 필수 요소[{0}]", "name"));
+
+        switch(type){
+            case 'S' :
+                return start(name);
+            case 'E' :
+                return end(name);
+            default :
+                throw new IllegalArgumentException(MessageFormat.format("유효하지 않은 제어 타입입니다. type=[{0}]", type));
+        }
+    }
+
+    private boolean start(String name) {
+        return false;
+    }
+    private boolean end(String name){
+        return false;
     }
 }

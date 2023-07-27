@@ -1,4 +1,4 @@
-package com.example.back.management.server;
+package com.example.back.web.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +45,8 @@ public class ServerController {
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> delete(@RequestParam("name") String name){
+    @DeleteMapping("/{name}")
+    public ResponseEntity<?> delete(@PathVariable String name){
         try {
             Assert.notNull(name, "서버명이 입력되어야 합니다.");
 
@@ -59,8 +59,8 @@ public class ServerController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<?> getOne(@RequestParam("name") String name){
+    @GetMapping("/{name}")
+    public ResponseEntity<?> get(@PathVariable String name){
         try{
             Assert.notNull(name, "서버명이 입력되어야 합니다.");
 
@@ -73,14 +73,22 @@ public class ServerController {
         }
     }
 
-    @PostMapping(path="/list")
+    @GetMapping
     public ResponseEntity<?> list(){
         try{
-            return ResponseEntity.ok().body(service.list());    
+            return ResponseEntity.ok().body(service.list());
         }catch(Throwable th) {
             return ResponseEntity.internalServerError().body("목록 조회 실패");
         }
     }
 
+    @PostMapping("control")
+    public ResponseEntity<?> control(@RequestParam("name") String name, @RequestParam("type") char type){
+        try{
+            return ResponseEntity.ok().body(service.control(name, type));
+        }catch(Throwable th){
+            return ResponseEntity.internalServerError().body("서버 제어 실패 : " + th.getMessage());
+        }
+    }
 
 }
