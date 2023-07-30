@@ -1,29 +1,37 @@
 package com.example.back.connector.socket;
 
 import com.example.back.connector.Server;
+import com.example.back.connector.Status;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 
-import java.net.*;
-import java.io.*;
-import java.nio.ByteBuffer;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 // TCP 프로토콜
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SocketServer implements Server {
 
+    private final Log logger = LogFactory.getLog(this.getClass());
     private ServerSocket server;
     private Socket client;
-
+    private String name ;
     private String address;
-
     private int port;
+    private Status status;
+    private byte[] requestData;
+    private byte[] responseData;
 
-    private byte[] data;
-
-    private String status;
     private OutputStream out;
-
     private InputStream in;
 
     public SocketServer(String address, int port){
@@ -33,6 +41,14 @@ public class SocketServer implements Server {
 
     public SocketServer(int port){
         this.port = port;
+    }
+
+    public byte[] getRequestData() {
+        return requestData;
+    }
+
+    public void setResponseData(byte[] responseData) {
+        this.responseData = responseData;
     }
 
     @Override
@@ -54,10 +70,17 @@ public class SocketServer implements Server {
     // TODO : 예외처리 필요
     @Override
     public void start() throws IOException {
-        bind();
-        client = accept();
-        in = client.getInputStream();
-        out = client.getOutputStream();
+        try {
+            bind();
+            client = accept();
+            in = client.getInputStream();
+            out = client.getOutputStream();
+
+            recv();
+        }catch (Throwable th){
+            status = Status.ERROR;
+            logger.error("서버 실행 실패", th);
+        }
     }
 
     public Socket accept() throws IOException {
@@ -77,15 +100,25 @@ public class SocketServer implements Server {
     }
 
     @Override
-    public void send(byte[] data) throws IOException {
-        out.write(data);
+    public void send() throws IOException {
+        out.write(responseData);
         out.close();
     }
 
     @Override
     public byte[] recv() throws IOException {
-        byte[] data = in.readAllBytes();
+        requestData = in.readAllBytes();
         in.close();
-        return data;
+        return requestData;
+    }
+
+    @Override
+    public Status getStatus() {
+        return this.status;
+    }
+
+    @Override
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

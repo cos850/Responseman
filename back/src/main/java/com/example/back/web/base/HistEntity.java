@@ -1,4 +1,4 @@
-package com.example.back.base;
+package com.example.back.web.base;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

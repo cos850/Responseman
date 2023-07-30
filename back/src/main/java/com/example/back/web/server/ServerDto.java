@@ -1,6 +1,7 @@
 package com.example.back.web.server;
 
-import com.example.back.base.HistDto;
+import com.example.back.web.base.HistDto;
+import com.example.back.web.base.Type;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class ServerDto extends HistDto<Server> {
 
     private String name;
+    private Type type;
     private int port ;
     private String desc;
     private String responseData;
@@ -17,6 +19,7 @@ public class ServerDto extends HistDto<Server> {
         super(server);
 
         this.name = server.getName();
+        this.type = server.getType();
         this.port = server.getPort();
         this.desc = server.getDesc();
         this.responseData = server.getResponseData();
@@ -24,9 +27,10 @@ public class ServerDto extends HistDto<Server> {
 
     public Server toEntity(){
         return Server.builder()
-                .name(this.name)
-                .port(this.port)
-                .desc(this.desc)
+                .name(name)
+                .type(type)
+                .port(port)
+                .desc(desc)
                 .responseData(this.responseData).build();
     }
 }

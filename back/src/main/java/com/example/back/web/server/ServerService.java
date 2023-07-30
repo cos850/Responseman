@@ -1,6 +1,10 @@
 package com.example.back.web.server;
 
+import com.example.back.connector.Status;
+import com.example.back.connector.management.ServerManager;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -13,12 +17,18 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class ServerService {
-
+    public Log logger = LogFactory.getLog(this.getClass());
     private final ServerRepository repository;
+    private ServerManager serverManager;
+    private final char CRATE = 'C', RUN = 'R', STOP = 'P';
 
     @Autowired
     public ServerService(ServerRepository repository){
         this.repository = repository;
+    }
+
+    public void setServerManager(ServerManager serverManager){
+        this.serverManager = serverManager;
     }
 
     public ServerDto getServer(String name){
@@ -27,7 +37,9 @@ public class ServerService {
 
     public ServerDto save(ServerDto dto){
         validation(dto, false);
-        return new ServerDto(repository.save(dto.toEntity()));
+        dto = new ServerDto(repository.save(dto.toEntity()));
+        create(dto.getName());
+        return dto;
     }
 
     public ServerDto update(ServerDto dto){
@@ -55,8 +67,6 @@ public class ServerService {
     }
 
     public List<ServerDto> list(){
-        System.out.println("list");
-        System.out.println(repository.findAll());
         return repository.findAll().stream().map(ServerDto::new).collect(Collectors.toList());
     }
 
@@ -72,19 +82,25 @@ public class ServerService {
         Assert.notNull(name, MessageFormat.format("필수 요소를 입력하지 않았습니다. 필수 요소[{0}]", "name"));
 
         switch(type){
-            case 'S' :
-                return start(name);
-            case 'E' :
-                return end(name);
-            default :
-                throw new IllegalArgumentException(MessageFormat.format("유효하지 않은 제어 타입입니다. type=[{0}]", type));
+            case CRATE -> create(name);
+            case RUN -> start(name);
+            case STOP -> stop(name);
+            default -> throw new IllegalArgumentException(MessageFormat.format("유효하지 않은 제어 타입입니다. type=[{0}]", type));
         }
+        return false;
+    }
+
+    private boolean create(String name) {
+        ServerDto dto = getServer(name);
+        serverManager.createServer(dto);
+
+        return serverManager.getStatus(name) == Status.ERROR ? false : true;
     }
 
     private boolean start(String name) {
         return false;
     }
-    private boolean end(String name){
+    private boolean stop(String name){
         return false;
     }
 }

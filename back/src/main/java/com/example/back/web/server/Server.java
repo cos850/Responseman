@@ -1,8 +1,14 @@
 package com.example.back.web.server;
 
-import com.example.back.base.HistEntity;
-import jakarta.persistence.*;
-import lombok.*;
+import com.example.back.web.base.HistEntity;
+import com.example.back.web.base.Type;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
@@ -13,6 +19,8 @@ public class Server extends HistEntity {
     // PK Mapping 참고 : https://www.baeldung.com/hibernate-identifiers
     @Id
     private String name;
+
+    private Type type;
 
     @Column(nullable = false)
     private int port;
